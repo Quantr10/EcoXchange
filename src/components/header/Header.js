@@ -7,7 +7,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from 'react-toastify';
 import { auth } from "../../firebase/config";
 import { useDispatch } from 'react-redux';
-import { SET_ACTIVE_USER } from '../../redux/slice/authSlice';
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from '../../redux/slice/authSlice';
+import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink';
 
 const logo = (
   <div className={styles.logo}>
@@ -38,26 +39,30 @@ const Header = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (user.displayName == null) {
-          const u1 = user.email.slice(0, -10);
-          const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
-          setDisplayName(uName);
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // console.log(user);
+          if (user.displayName == null) {
+            const u1 = user.email.slice(0, -10);
+            const uName = u1.charAt(0).toUpperCase() + u1.slice(1);
+            setDisplayName(uName);
+          } else {
+            setDisplayName(user.displayName);
+          }
+  
+          dispatch(
+            SET_ACTIVE_USER({
+              email: user.email,
+              userName: user.displayName ? user.displayName : displayName,
+              userID: user.uid,
+            })
+          );
         } else {
-          setDisplayName(user.displayName);
+          setDisplayName("");
+          dispatch(REMOVE_ACTIVE_USER());
         }
-
-        dispatch(SET_ACTIVE_USER({
-          email: user.email,
-          userID: user.uid,
-          userName: user.displayName ? user.displayName : displayName
-        }));
-      } else {
-        setDisplayName("");
-      }
-    });
-  }, []);
+      });
+    }, [dispatch, displayName]);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -101,14 +106,27 @@ const Header = () => {
 
           <div className={styles["header-right"]} onClick={hideMenu}>
             <span className={styles.links}>
-              <NavLink to="/login" className={activeLink}>Login</NavLink>
-              <a href="#">
-                <FaUserCircle size={16}/>
-                Hi, {displayName}
-              </a>
-              <NavLink to="/register" className={activeLink}>Register</NavLink>
-              <NavLink to="/order-history"className={activeLink}>My Orders</NavLink>
-              <NavLink to="/"onClick={logoutUser}>Logout</NavLink>
+              <ShowOnLogout>
+                <NavLink to="/login" className={activeLink}>
+                  Login
+                </NavLink>
+              </ShowOnLogout>
+              <ShowOnLogin>
+                <a href="#home" style={{ color: "#ff7722" }}>
+                  <FaUserCircle size={16} />
+                  Hi, {displayName}
+                </a>
+              </ShowOnLogin>
+              <ShowOnLogin>
+                <NavLink to="/order-history" className={activeLink}>
+                  My Orders
+                </NavLink>
+              </ShowOnLogin>
+              <ShowOnLogin>
+                <NavLink to="/" onClick={logoutUser}>
+                  Logout
+                </NavLink>
+              </ShowOnLogin>
             </span>
             {cart}
           </div>
