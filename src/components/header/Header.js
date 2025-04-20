@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from '../../redux/slice/authSlice';
 import ShowOnLogin, { ShowOnLogout } from '../hiddenLink/hiddenLink';
 
+
 const logo = (
   <div className={styles.logo}>
     <Link to="/">
@@ -95,6 +96,9 @@ const Header = () => {
             <li className={styles["logo-mobile"]}>
               {logo}
               <FaTimes size={22} color="#fff" onClick={hideMenu}/>
+            </li>
+            <li>
+                <button className="--btn --btn-primary">Admin</button>
             </li>
             <li>
               <NavLink to="/" className={activeLink}>Home</NavLink>
