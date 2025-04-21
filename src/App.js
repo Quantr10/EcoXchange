@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Home, Contact, Cart, Admin, OrderHistory, Login, Register, Reset} from "./pages";
 import { Header, Footer } from "./components";
+import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
 
 function App() {
   return (
@@ -16,11 +17,18 @@ function App() {
           <Route path="/cart" element={<Cart/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/admin" element={<Admin/>} />
           <Route path="/order-history" element={<OrderHistory/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/reset" element={<Reset/>} />
           <Route path="/register" element={<Register/>} />
+          <Route
+            path="/admin/*"
+            element={
+              <AdminOnlyRoute>
+                <Admin />
+              </AdminOnlyRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
