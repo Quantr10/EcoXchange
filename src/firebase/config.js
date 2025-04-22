@@ -1,16 +1,17 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// Your web app's Firebase configuration
-export const firebaseConfig = {
-  apiKey: "AIzaSyCLAYUjsiYSq5lalRfvour7pim0kEkVSPg",
-  authDomain: "project-2c82c.firebaseapp.com",
-  projectId: "project-2c82c",
-  storageBucket: "project-2c82c.firebasestorage.app",
-  messagingSenderId: "1034654892468",
-  appId: "1:1034654892468:web:e867b9d269be02291832e1"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAwoyR6Jieyohtt6WdcTJ1sU0u9KiztOSk",
+  authDomain: "eshop-7886e.firebaseapp.com",
+  projectId: "eshop-7886e",
+  storageBucket: "eshop-7886e.firebasestorage.app",
+  messagingSenderId: "130356282167",
+  appId: "1:130356282167:web:8a00b9672f9b568dad90b2"
 };
 
 // Initialize Firebase
@@ -18,4 +19,4 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-export default app;
+export default app
