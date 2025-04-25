@@ -37,16 +37,17 @@ const filterSlice = createSlice({
         }
         if (sort === "a-z") {
             tempProducts = products.slice().sort((a, b) => {
-                return a.name.localCompare(b.name)
+                return a.name.localeCompare(b.name)
             });
         }
         if (sort === "z-a") {
             tempProducts = products.slice().sort((a, b) => {
-                return b.name.localCompare(a.name)
+                return b.name.localeCompare(a.name)
             });
         }
         state.filteredProducts = tempProducts;
     },
+
     FILTER_BY_CATEGORY(state, action) {
         const {products, category} = action.payload;
         let tempProducts = []
@@ -56,11 +57,29 @@ const filterSlice = createSlice({
             tempProducts = products.filter((product) => product.category === category)
         }
         state.filteredProducts = tempProducts;
+    },
+
+    FILTER_BY_BRAND(state, action) {
+        const {products, brand} = action.payload;
+        let tempProducts = []
+        if (brand === "All") {
+            tempProducts = products;
+        } else {
+            tempProducts = products.filter((product) => product.brand === brand)
+        }
+        state.filteredProducts = tempProducts;
+    },
+
+    FILTER_BY_PRICE(state, action) {
+        const {products, price} = action.payload;
+        let tempProducts = []
+        tempProducts = products.filter((product) => product.price <= price)
+        state.filteredProducts = tempProducts;
     }
   }
 });
 
-export const {FILTER_BY_SEARCH, SORT_PRODUCTS, FILTER_BY_CATEGORY} = filterSlice.actions
+export const {FILTER_BY_SEARCH, FILTER_BY_PRICE, SORT_PRODUCTS, FILTER_BY_CATEGORY, FILTER_BY_BRAND} = filterSlice.actions
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
