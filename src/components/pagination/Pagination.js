@@ -26,7 +26,7 @@ const Pagination = ({currentPage, setCurrentPage, productsPerPage, totalProducts
     //Go to prev page
     const paginatePrev = () => {
         setCurrentPage(currentPage - 1) 
-        if ((currentPage - 1) % pageNumberLimit == 0) {
+        if ((currentPage - 1) % pageNumberLimit === 0) {
             setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
             setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
         }
