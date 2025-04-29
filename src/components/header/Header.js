@@ -27,7 +27,6 @@ const activeLink = ({isActive}) => (isActive ? `${styles.active}` : "")
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [displayName, setDisplayName] = useState("");
-  const [scrollPage, setScrollPage] = useState(false);
   const cartTotalQuantity = useSelector(selectCartTotalQuantity)
 
   useEffect(() => {
@@ -36,15 +35,7 @@ const Header = () => {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const fixNavbar = () => {
-    if(window.scrollY > 50) {
-      setScrollPage(true)
-    } else {
-      setScrollPage(false)
-    }
-  }
-  window.addEventListener("scroll" , fixNavbar)
-
+  
   useEffect(() => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -101,7 +92,8 @@ const Header = () => {
   )
 
   return (
-    <header className={scrollPage ? `${styles.fixed}` : null}>
+    <header className={styles.fixed}>
+
       <div className={styles.header}>
         {logo}
       
