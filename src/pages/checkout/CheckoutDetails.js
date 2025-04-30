@@ -213,7 +213,7 @@ const CheckoutDetails = () => {
           </div>
           <div>
             <Card cardClass={styles.card}>
-                <CheckoutSummary/>
+              <CheckoutSummary/>
             </Card>
           </div>
         </form>

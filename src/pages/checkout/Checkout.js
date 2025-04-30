@@ -34,7 +34,7 @@ const Checkout = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [dispatch, cartItems]);
 
-  const description = `eShop payment: email: ${customerEmail}, Amoun: ${totalAmount}`;
+  const description = `eShop payment: email: ${customerEmail}, Amount: ${totalAmount}`;
 
   useEffect(() => {
     fetch("http://localhost:4242/create-payment-intent", {
@@ -59,31 +59,33 @@ const Checkout = () => {
       })
       .catch((error) => {
         setMessage("Failed to initialize checkout")
-        toast.error("Something went wrong")
-      })
+        toast.error("Something went wrong!!!")
+      });
   }, []);
 
   const appearance = {
     theme: "stripe",
   };
-  // Enable the skeleton loader UI for optimal loading.
-  const loader = "auto";
+  
+  const options = {
+    clientSecret,
+    appearance,
+  };
 
   return (
-        <>
-            <section>
-                <div className="container">
-                    {!clientSecret && <h3>{message}</h3>}        
-                </div>
-                
-            </section>
-            {clientSecret && (
-                <Elements options={option} stripe={stripePromise}>
-                    <CheckoutForm/>
-                </Elements>
-            )}
-        </>
-    )
+    <>
+      <section>
+          <div className="container">
+              {!clientSecret && <h3>{message}</h3>}        
+          </div>
+      </section>
+      {clientSecret && (
+          <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm/>
+          </Elements>
+      )}
+    </>
+  )
 };
 
 export default Checkout;

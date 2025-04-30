@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
@@ -8,38 +8,104 @@ import styles from "./CheckoutForm.module.css";
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import spinnerImg from "../../assets/spinner.jpg";
 import Card from "../card/Card";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { selectEmail, selectUserID } from "../../redux/slice/authSlice";
+import {
+  CLEAR_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+} from "../../redux/slice/cartSlice";
+import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
+  const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
-  const [message, setMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const userID = useSelector(selectUserID);
+  const userEmail = useSelector(selectEmail);
+  const cartItems = useSelector(selectCartItems);
+  const shippingAddress = useSelector(selectShippingAddress);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
 
-    if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
+  useEffect(() => {
+    if (!stripe) {
       return;
     }
 
-    setIsLoading(true);
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/complete",
-      },
-    });
+    if (!clientSecret) {
+      return;
+    }
+  }, [stripe]);
 
-    setIsLoading(false);
+  const saveOrder = () => {
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderData: date,
+      orderTIme: time,
+      orderAmount: cartTotalAmount,
+      orderStatus: "Order Placed...",
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
+    try {
+      addDoc(collection(db, "orders"), orderConfig);
+      dispatch(CLEAR_CART());
+      toast.success("Order Saved");
+      navigate("/checkout-success")
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
-  const paymentElementOptions = {
-    layout: "accordion",
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage(null);
+    if (!stripe || !elements) {
+      return;
+    }
+    setIsLoading(true);
+    const confirmPayment = await stripe
+      .confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: "http://localhost:3000/checkout-success",
+        },
+        redirect: "if_required",
+      })
+      .then((result) => {
+        // ok - paymentIntent // bad - error
+        if (result.error) {
+            toast.error(result.error.message);
+            setMessage(result.error.message);
+            return;
+        }
+        if (result.paymentIntent) {
+            if (result.paymentIntent.status === "succeeded") {
+            setIsLoading(false);
+            toast.success("Payment successful");
+            saveOrder();
+            }
+        }
+      });
+    setIsLoading(false);
   };
 
   return (
