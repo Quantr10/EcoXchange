@@ -7,6 +7,7 @@ import { Header, Footer } from "./components";
 import AdminOnlyRoute from "./components/adminOnlyRoute/AdminOnlyRoute";
 import ProductDetails from "./components/product/productDetails/ProductDetails";
 import CheckoutDetails from "./pages/checkout/CheckoutDetails";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           />
           <Route path="/product-details/:id" element={<ProductDetails />} />
           <Route path="/checkout-details" element={<CheckoutDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
 
         </Routes>
 
