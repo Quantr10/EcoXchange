@@ -1,19 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const CheckoutSuccess = () => {
   return (
     <section>
-        <div className="containter">
-            <h2>Checkout Success</h2>
-            <p>Thank you for your purchase</p>
-            <br/>
-            <Link to="/order-history">
-                <button className="--btn --btn-primary">View Order Status</button>
-            </Link>
-        </div>
-    </section>
-  )
-}
+      <div className="containter">
+        <h2>Checkout Success</h2>
+        <p>Thank you for your purchase</p>
+        <br />
+        
+          <button className="--btn --btn-primary">
+            <Link to="/order-history">View Order Status</Link>
+          </button>
 
-export default CheckoutSuccess
+      </div>
+    </section>
+  );
+};
+
+export default CheckoutSuccess;

@@ -5,9 +5,9 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import styles from "./CheckoutForm.module.css";
+import Card from "../card/Card";
 import CheckoutSummary from "../checkoutSummary/CheckoutSummary";
 import spinnerImg from "../../assets/spinner.jpg";
-import Card from "../card/Card";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEmail, selectUserID } from "../../redux/slice/authSlice";
@@ -33,8 +33,8 @@ const CheckoutForm = () => {
   const userID = useSelector(selectUserID);
   const userEmail = useSelector(selectEmail);
   const cartItems = useSelector(selectCartItems);
-  const shippingAddress = useSelector(selectShippingAddress);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
+  const shippingAddress = useSelector(selectShippingAddress);
 
   useEffect(() => {
     if (!stripe) {
@@ -50,6 +50,7 @@ const CheckoutForm = () => {
     }
   }, [stripe]);
 
+  // Save order to Order History
   const saveOrder = () => {
     const today = new Date();
     const date = today.toDateString();
@@ -57,8 +58,8 @@ const CheckoutForm = () => {
     const orderConfig = {
       userID,
       userEmail,
-      orderData: date,
-      orderTIme: time,
+      orderDate: date,
+      orderTime: time,
       orderAmount: cartTotalAmount,
       orderStatus: "Order Placed...",
       cartItems,
@@ -68,8 +69,8 @@ const CheckoutForm = () => {
     try {
       addDoc(collection(db, "orders"), orderConfig);
       dispatch(CLEAR_CART());
-      toast.success("Order Saved");
-      navigate("/checkout-success")
+      toast.success("Order saved");
+      navigate("/checkout-success");
     } catch (error) {
       toast.error(error.message);
     }
@@ -78,14 +79,18 @@ const CheckoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
+
     if (!stripe || !elements) {
       return;
     }
+
     setIsLoading(true);
+
     const confirmPayment = await stripe
       .confirmPayment({
         elements,
         confirmParams: {
+          // Make sure to change this to your payment completion page
           return_url: "http://localhost:3000/checkout-success",
         },
         redirect: "if_required",
@@ -93,24 +98,25 @@ const CheckoutForm = () => {
       .then((result) => {
         // ok - paymentIntent // bad - error
         if (result.error) {
-            toast.error(result.error.message);
-            setMessage(result.error.message);
-            return;
+          toast.error(result.error.message);
+          setMessage(result.error.message);
+          return;
         }
         if (result.paymentIntent) {
-            if (result.paymentIntent.status === "succeeded") {
+          if (result.paymentIntent.status === "succeeded") {
             setIsLoading(false);
             toast.success("Payment successful");
             saveOrder();
-            }
+          }
         }
       });
+
     setIsLoading(false);
   };
 
   return (
     <section>
-      <div className={`containter ${styles.checkout}`}>
+      <div className={`container ${styles.checkout}`}>
         <h2>Checkout</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -139,6 +145,7 @@ const CheckoutForm = () => {
                   )}
                 </span>
               </button>
+              {/* Show any error or success messages */}
               {message && <div id={styles["payment-message"]}>{message}</div>}
             </Card>
           </div>

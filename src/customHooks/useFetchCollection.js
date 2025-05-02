@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 
 
 const useFetchCollection = (collectionName) => {
-
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -14,7 +13,6 @@ const useFetchCollection = (collectionName) => {
         try {
           const docRef = collection(db, collectionName);
           const q = query(docRef, orderBy("createdAt", "desc"));
-    
           onSnapshot(q, (snapshot) => {
             const allData = snapshot.docs.map((doc) => ({
               id: doc.id,
