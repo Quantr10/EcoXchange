@@ -49,7 +49,6 @@ const OrderHistory = () => {
                 </thead>
                 <tbody>
                   {filteredOrders.map((order, index) => {
-                    console.log("Order", order);
                     const {id, orderDate, orderTime, orderAmount, orderStatus} = order;
                     return (
                       <tr key={id} onClick={() => handleClick(id)}>
