@@ -7,36 +7,22 @@ import styles from './ProductDetails.module.css'
 import spinnerImg from "../../../assets/spinner.jpg"
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY, DECREASE_CART, selectCartItems } from '../../../redux/slice/cartSlice';
+import useFetchDocument from '../../../customHooks/useFetchDocument';
 
 const ProductDetails = () => {
   const {id} = useParams()
   const [product, setProduct] = useState(null);
   const dispatch = useDispatch()
   const cartItems = useSelector(selectCartItems)
+  const { document } = useFetchDocument("products", id);
   const cart = cartItems.find((cart) => cart.id === id)
   const isCartAdded = cartItems.findIndex((cart) => {
     return cart.id === id
   })
 
   useEffect(() => {
-    getProduct()
-  }, [])
-
-  const getProduct = async () => {
-
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const obj = {
-        id: id,
-        ...docSnap.data()
-      }
-      setProduct(obj)
-    } else {
-      toast.error("Product not found")
-    }
-  }
+    setProduct(document)
+  }, [document])
 
   const addToCart = (product) => {
     dispatch(ADD_TO_CART(product))
