@@ -56,7 +56,7 @@ const OrderDetails = () => {
                         <p><b>{name}</b></p>
                         <img src={imageURL} alt={name} style={{width:"100px"}}/>
                       </td>
-                      <td>{price}</td>
+                      <td>${price}</td>
                       <td>{cartQuantity}</td>
                       <td>
                         ${(price * cartQuantity).toFixed(2)}
