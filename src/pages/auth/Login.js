@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react'
-import styles from "./auth.module.css";
+import styles from "./auth.module.scss";
 import loginImg from "../../assets/login.png";
 import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa';

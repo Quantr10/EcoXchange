@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./ProductFilter.module.css"
+import styles from "./ProductFilter.module.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectMaxPrice, selectMinPrice, selectProducts } from '../../../redux/slice/productSlice'
 import { FILTER_BY_BRAND, FILTER_BY_CATEGORY, FILTER_BY_PRICE } from '../../../redux/slice/filterSlice'

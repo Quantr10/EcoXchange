@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./Navbar.module.css"
+import styles from "./Navbar.module.scss"
 import { FaUserCircle } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { selectUserName } from '../../../redux/slice/authSlice'

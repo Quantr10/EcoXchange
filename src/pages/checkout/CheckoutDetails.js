@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import styles from "./CheckoutDetails.module.css";
-import Card from "../../components/card/Card";
+import { useState } from "react";
 import { CountryDropdown } from "react-country-region-selector";
 import { useDispatch } from "react-redux";
-import { SAVE_BILLING_ADDRESS, SAVE_SHIPPING_ADDRESS } from "../../redux/slice/checkoutSlice";
 import { useNavigate } from "react-router-dom";
-import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary";
+import Card from "../../components/card/Card";
+import CheckoutSummary from "../../components/checkoutSummary/CheckoutSummary.js";
+import {
+  SAVE_BILLING_ADDRESS,
+  SAVE_SHIPPING_ADDRESS,
+} from "../../redux/slice/checkoutSlice";
+import styles from "./CheckoutDetails.module.scss";
 
 const initialAddressState = {
   name: "",
@@ -17,6 +20,7 @@ const initialAddressState = {
   country: "",
   phone: "",
 };
+
 const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
@@ -25,35 +29,36 @@ const CheckoutDetails = () => {
     ...initialAddressState,
   });
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleShipping = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     setShippingAddress({
-        ...shippingAddress,
-        [name]:value
-    })
-};
+      ...shippingAddress,
+      [name]: value,
+    });
+  };
 
   const handleBilling = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target;
     setBillingAddress({
-        ...billingAddress,
-        [name]:value
-  });
-    }
+      ...billingAddress,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress))
-    dispatch(SAVE_BILLING_ADDRESS(billingAddress))
-    navigate("/checkout")
+    e.preventDefault();
+    dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
+    dispatch(SAVE_BILLING_ADDRESS(billingAddress));
+    navigate("/checkout");
   };
 
   return (
     <section>
-      <div className={`containter ${styles.checkout}`}>
+      <div className={`container ${styles.checkout}`}>
+        <h2>Checkout Details</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <Card cardClass={styles.card}>
@@ -62,7 +67,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="Recipient Name"
-                reqired
+                required
                 name="name"
                 value={shippingAddress.name}
                 onChange={(e) => handleShipping(e)}
@@ -71,7 +76,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="Address line 1"
-                reqired
+                required
                 name="line1"
                 value={shippingAddress.line1}
                 onChange={(e) => handleShipping(e)}
@@ -88,7 +93,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="City"
-                reqired
+                required
                 name="city"
                 value={shippingAddress.city}
                 onChange={(e) => handleShipping(e)}
@@ -97,7 +102,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="State"
-                reqired
+                required
                 name="state"
                 value={shippingAddress.state}
                 onChange={(e) => handleShipping(e)}
@@ -106,27 +111,30 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="Postal code"
-                reqired
+                required
                 name="postal_code"
                 value={shippingAddress.postal_code}
                 onChange={(e) => handleShipping(e)}
               />
-              <CountryDropdown 
-                valueType="short"
+              {/* COUNTRY INPUT */}
+              <CountryDropdown
                 className={styles.select}
+                valueType="short"
                 value={shippingAddress.country}
-                onChange={(val) => handleShipping({
+                onChange={(val) =>
+                  handleShipping({
                     target: {
-                        name: "country",
-                        value: val
-                    }
-                })}
+                      name: "country",
+                      value: val,
+                    },
+                  })
+                }
               />
               <label>Phone</label>
               <input
                 type="text"
                 placeholder="Phone"
-                reqired
+                required
                 name="phone"
                 value={shippingAddress.phone}
                 onChange={(e) => handleShipping(e)}
@@ -138,8 +146,8 @@ const CheckoutDetails = () => {
               <label>Recipient Name</label>
               <input
                 type="text"
-                placeholder="Recipient Name"
-                reqired
+                placeholder="Name"
+                required
                 name="name"
                 value={billingAddress.name}
                 onChange={(e) => handleBilling(e)}
@@ -148,7 +156,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="Address line 1"
-                reqired
+                required
                 name="line1"
                 value={billingAddress.line1}
                 onChange={(e) => handleBilling(e)}
@@ -165,7 +173,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="City"
-                reqired
+                required
                 name="city"
                 value={billingAddress.city}
                 onChange={(e) => handleBilling(e)}
@@ -174,7 +182,7 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="State"
-                reqired
+                required
                 name="state"
                 value={billingAddress.state}
                 onChange={(e) => handleBilling(e)}
@@ -183,37 +191,42 @@ const CheckoutDetails = () => {
               <input
                 type="text"
                 placeholder="Postal code"
-                reqired
+                required
                 name="postal_code"
                 value={billingAddress.postal_code}
                 onChange={(e) => handleBilling(e)}
               />
-              <CountryDropdown 
-                valueType="short"
+              {/* COUNTRY INPUT */}
+              <CountryDropdown
                 className={styles.select}
+                valueType="short"
                 value={billingAddress.country}
-                onChange={(val) => handleBilling({
+                onChange={(val) =>
+                  handleBilling({
                     target: {
-                        name: "country",
-                        value: val
-                    }
-                })}
+                      name: "country",
+                      value: val,
+                    },
+                  })
+                }
               />
               <label>Phone</label>
               <input
                 type="text"
                 placeholder="Phone"
-                reqired
+                required
                 name="phone"
                 value={billingAddress.phone}
                 onChange={(e) => handleBilling(e)}
               />
-              <button type="submit" className="--btn --btn-primary">Proceed To Checkout</button>
+              <button type="submit" className="--btn --btn-primary">
+                Proceed To Checkout
+              </button>
             </Card>
           </div>
           <div>
             <Card cardClass={styles.card}>
-              <CheckoutSummary/>
+              <CheckoutSummary />
             </Card>
           </div>
         </form>

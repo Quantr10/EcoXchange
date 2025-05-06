@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import styles from './Admin.module.css'
+import styles from './Admin.module.scss'
 import Home from "../../components/admin/home/Home";
 import Navbar from "../../components/admin/navbar/Navbar"
 import AddProduct from '../../components/admin/addProduct/AddProduct'

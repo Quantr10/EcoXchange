@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectCartItems, selectCartTotalAmount, selectCartTotalQuantity } from '../../redux/slice/cartSlice'
 import Card from '../card/Card'
 import { Link } from 'react-router-dom'
-import styles from "./CheckoutSummary.module.css"
+import styles from "./CheckoutSummary.module.scss"
 
 const CheckoutSummary = () => {
     const cartItems = useSelector(selectCartItems)

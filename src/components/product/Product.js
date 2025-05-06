@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./Product.module.css"
+import styles from "./Product.module.scss"
 import ProductFilter from './productFilter/ProductFilter'
 import ProductList from './productList/ProductList'
 import useFetchCollection from '../../customHooks/useFetchCollection'

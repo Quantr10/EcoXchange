@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ViewProducts.module.css";
+import styles from "./ViewProducts.module.scss";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
 import {

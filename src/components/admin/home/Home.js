@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "./Home.module.css";
+import styles from "./Home.module.scss";
 import InfoBox from "../../infoBox/InfoBox";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { BsCart4 } from "react-icons/bs";

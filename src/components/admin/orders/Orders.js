@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styles from './Orders.module.css'
+import styles from './Orders.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import useFetchCollection from '../../../customHooks/useFetchCollection'

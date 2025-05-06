@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import styles from "./Contact.module.css";
+import { useRef } from "react";
 import Card from "../../components/card/Card";
-import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
+import styles from "./Contact.module.scss";
+import { FaPhoneAlt, FaEnvelope, FaTwitter } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
@@ -11,18 +11,17 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+    console.log(form.current);
 
     emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        "template_chucin3",
+        "template_7xyhwen",
         form.current,
-        {
-          publicKey: "e_T793IWajAd1D50a",
-        }
+        "user_hKs2aRfLoozcqA28UpUyz"
       )
       .then(
-        () => {
+        (result) => {
           toast.success("Message sent successfully");
         },
         (error) => {
@@ -34,8 +33,8 @@ const Contact = () => {
 
   return (
     <section>
-      <div className={`containter ${styles.contact}`}>
-        <h2>Contact</h2>
+      <div className={`container ${styles.contact}`}>
+        <h2>Contact Us</h2>
         <div className={styles.section}>
           <form ref={form} onSubmit={sendEmail}>
             <Card cardClass={styles.card}>
@@ -50,7 +49,7 @@ const Contact = () => {
               <input
                 type="email"
                 name="user_email"
-                placeholder="Your Email"
+                placeholder="Your active email"
                 required
               />
               <label>Subject</label>
@@ -65,24 +64,27 @@ const Contact = () => {
               <button className="--btn --btn-primary">Send Message</button>
             </Card>
           </form>
+
           <div className={styles.details}>
             <Card cardClass={styles.card2}>
-              <h3>Our Contact Infomation</h3>
-              <p>
-                Fill in the form or contact us via other channels listed below
-              </p>
+              <h3>Our Contact Information</h3>
+              <p>Fill the form or contact us via other channels listed below</p>
               <div className={styles.icons}>
                 <span>
                   <FaPhoneAlt />
-                  <p>7657123295</p>
+                  <p>+234 705 141 6545</p>
                 </span>
                 <span>
                   <FaEnvelope />
-                  <p>thequantran2005@gmail.com</p>
+                  <p>Support@eshop.com</p>
                 </span>
                 <span>
                   <GoLocation />
-                  <p>Greencastle, Indiana</p>
+                  <p>Abuja, Nigeria</p>
+                </span>
+                <span>
+                  <FaTwitter />
+                  <p>@ZinoTrust</p>
                 </span>
               </div>
             </Card>

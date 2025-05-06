@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./OrderDetails.module.css"
+import styles from "./OrderDetails.module.scss"
 import { Link, useParams } from 'react-router-dom'
 import useFetchDocument from "../../../customHooks/useFetchDocument"
 import spinnerImg from "../../../assets/spinner.jpg"

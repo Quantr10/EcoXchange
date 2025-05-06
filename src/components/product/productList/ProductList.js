@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./ProductList.module.css"
+import styles from "./ProductList.module.scss"
 import { BsFillGridFill } from 'react-icons/bs'
 import { FaListAlt } from 'react-icons/fa'
 import Search from '../../search/Search'

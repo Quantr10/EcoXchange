@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { selectUserID, selectUserName } from "../../redux/slice/authSlice";
 import Card from "../card/Card";
-import styles from "./ReviewProducts.module.css";
+import styles from "./ReviewProducts.module.scss";
 import ReactStars from 'react-stars'
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";

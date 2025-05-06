@@ -5,7 +5,7 @@ import Loader from '../../components/loader/Loader'
 import useFetchCollection from "../../customHooks/useFetchCollection"
 import { selectUserID } from '../../redux/slice/authSlice'
 import { selectOrderHistory, STORE_ORDERS } from '../../redux/slice/orderSlice'
-import styles from "./OrderHistory.module.css"
+import styles from "./OrderHistory.module.scss"
 
 const OrderHistory = () => {
   const {data, isLoading} = useFetchCollection("orders")

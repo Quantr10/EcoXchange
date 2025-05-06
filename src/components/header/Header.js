@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaTimes, FaUserCircle } from 'react-icons/fa';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
@@ -16,7 +16,7 @@ const logo = (
   <div className={styles.logo}>
     <Link to="/">
       <h2>
-        e<span>Shop</span>.
+        EcoX<span>change</span>
       </h2>
     </Link>
   </div>

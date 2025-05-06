@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import styles from "./ProductDetails.module.css";
+import styles from "./ProductDetails.module.scss";
 import spinnerImg from "../../../assets/spinner.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import {

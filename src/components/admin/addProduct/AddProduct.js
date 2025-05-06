@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from "./AddProduct.module.css"
+import styles from "./AddProduct.module.scss"
 import Card from "../../card/Card"
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { db, storage } from '../../../firebase/config'

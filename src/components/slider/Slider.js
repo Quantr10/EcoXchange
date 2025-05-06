@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { sliderData } from "./slider-data"
-import "./Slider.css"
+import "./Slider.scss"
 
 
 const Slider = () => {
