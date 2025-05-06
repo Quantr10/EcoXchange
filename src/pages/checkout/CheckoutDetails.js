@@ -20,7 +20,6 @@ const initialAddressState = {
   country: "",
   phone: "",
 };
-
 const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
