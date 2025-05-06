@@ -72,19 +72,15 @@ const Contact = () => {
               <div className={styles.icons}>
                 <span>
                   <FaPhoneAlt />
-                  <p>+234 705 141 6545</p>
+                  <p>+765 712 3295</p>
                 </span>
                 <span>
                   <FaEnvelope />
-                  <p>Support@eshop.com</p>
+                  <p>thequantran2005@gmail.com</p>
                 </span>
                 <span>
                   <GoLocation />
-                  <p>Abuja, Nigeria</p>
-                </span>
-                <span>
-                  <FaTwitter />
-                  <p>@ZinoTrust</p>
+                  <p>Greencastle, Indiana</p>
                 </span>
               </div>
             </Card>

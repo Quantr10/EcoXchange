@@ -5,7 +5,6 @@ import Product from '../../components/product/Product'
 const Home = () => {
   const url = window.location.href;
   
-
   useEffect(() => {
     const scrollToProducts = () => {
       if (url.includes("#products")) {
@@ -13,7 +12,7 @@ const Home = () => {
           top: 650,
           behavior: "smooth"
         })
-        return 
+        return;
       }
     }
 

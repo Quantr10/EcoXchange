@@ -1,23 +1,21 @@
+import slider1 from "../../assets/slider1.jpg"
+import slider2 from "../../assets/slider2.jpg"
+import slider3 from "../../assets/slider3.jpg"
+import slider4 from "../../assets/slider4.jpg"
+
+
 export const sliderData = [
     {
-      image: "https://i.ibb.co/CBGRLhG/bg-4.jpg",
-      heading: "Shoes Villa",
-      desc: "Up to 30% off on all onsale proucts.",
+      image: slider2,
+      desc: "Give Your Clothes a Second Life — Let's Make a Difference!",
     },
     {
-      image: "https://i.ibb.co/cDLBk5h/bg-1.jpg",
-      heading: "Women Fashion",
-      desc: "Up to 30% off on all onsale proucts.",
+      image: slider4,
+      desc: "Too Many Hoodies? We’ll Take ‘Em!",
     },
     {
-      image: "https://i.ibb.co/HXjD3V0/bg-2.jpg",
-      heading: "Men Fashion",
-      desc: "Up to 30% off on all onsale proucts.",
-    },
-    {
-      image: "https://i.ibb.co/H2FRmtV/bg-3.jpg",
-      heading: "Awesome Gadgets",
-      desc: "Up to 30% off on all onsale proucts.",
+      image: slider3,
+      desc: "Campus Deals You’ll Love – Pre-Loved Styles Starting at $5!",
     },
   ];
   

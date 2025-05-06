@@ -35,26 +35,32 @@ const Slider = () => {
         return () => clearInterval(slideInterval)
     }, [currentSlide, slideInterval, autoScroll])
 
+    const scrollTo = () => {
+        window.scrollTo({
+            top: 650,
+            behavior: "smooth"
+          })
+    }
+
     return (
         <div className="slider">
             <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide}/>
             <AiOutlineArrowRight className="arrow next" onClick={nextSlide}/>
 
             {sliderData.map((slide, index) => {
-                const {image, heading, desc} = slide
+                const {image, desc} = slide
                 return (
                     <div key={index} className={index === currentSlide ? "slide current" : "slide"}>
                         {index === currentSlide && (
                             <>
                                 <img src={image} alt="slide" />
                                 <div className="content">
-                                    <d2>{heading}</d2>
-                                    <p>{desc}</p>
+                                    <h4>{desc}</h4>
                                     <hr/>
-                                    <a href="#product" className="--btn --btn-primary">
-                                        Show Now
-                                    </a>
-                                </div>
+                                    <button onClick={scrollTo} className="--btn --btn-primary">
+                                        Shop Now
+                                    </button>
+                             </div>
                             </>
                         )}
                     </div>
