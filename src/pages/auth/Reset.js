@@ -29,30 +29,30 @@ const Reset = () => {
   return (
     <>
       {isLoading && <Loader />}
-    <section className={`containter ${styles.auth}`}>
-      <div className={styles.img}>
-          <img src={resetImg} alt="Reset" width="400"/>
-      </div>
-      <Card>
-        <div className={styles.form}>
-          <h2>Reset Password</h2>
-          <form onSubmit={resetPassword}>
-              <input 
-                type="text"
-                placeholder="Email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button type="submit" className="--btn --btn-primary --btn-block">Reset Password</button>
-              <div className={styles.links}>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
-              </div>
-          </form>
+      <section className={`containter ${styles.auth}`}>
+        <div className={styles.img}>
+            <img src={resetImg} alt="Reset" width="400"/>
         </div>
-      </Card>
-    </section>
+        <Card>
+          <div className={styles.form}>
+            <h2>Reset Password</h2>
+            <form onSubmit={resetPassword}>
+                <input 
+                  type="text"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <button type="submit" className="--btn --btn-primary --btn-block">Reset Password</button>
+                <div className={styles.links}>
+                  <Link to="/login">Login</Link>
+                  <Link to="/register">Register</Link>
+                </div>
+            </form>
+          </div>
+        </Card>
+      </section>
     </>
   )
 }

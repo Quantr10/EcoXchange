@@ -13,7 +13,6 @@ const Slider = () => {
     let slideInterval;
     let intervalTime = 5000;
 
-
     const nextSlide = () => {
         setCurrentSlide(currentSlide === sliderLength-1 ? 0 : currentSlide +1);
     };
